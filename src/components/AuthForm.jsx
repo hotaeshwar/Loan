@@ -42,19 +42,19 @@ const AuthForm = ({ onAuthSuccess }) => {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#070a13] flex items-center justify-center p-4 overflow-hidden">
-      {/* Decorative ambient glowing backdrops */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-indigo-500/10 blur-[120px] animate-pulse-glow"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-blue-500/10 blur-[120px] animate-pulse-glow" style={{ animationDelay: '-4s' }}></div>
+    <div className="relative min-h-screen bg-[#f1f5f9] flex items-center justify-center p-4 overflow-hidden">
+      {/* Decorative ambient glowing backdrops (pastel tones) */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-indigo-400/10 blur-[120px] animate-pulse-glow"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-blue-450/10 blur-[120px] animate-pulse-glow" style={{ animationDelay: '-4s' }}></div>
 
       <div className="relative w-full max-w-md">
         {/* Glowing border card wrapper */}
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-2xl blur opacity-30 hover:opacity-50 transition duration-1000"></div>
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-400 to-blue-450 rounded-2xl blur opacity-15 hover:opacity-25 transition duration-1000"></div>
         
-        <div className="relative glass-panel rounded-2xl shadow-2xl p-8 w-full">
+        <div className="relative glass-panel bg-white rounded-2xl shadow-xl p-8 w-full">
           <div className="text-center mb-8">
-            <div className="relative w-20 h-20 mx-auto mb-4 bg-slate-900/60 rounded-2xl flex items-center justify-center border border-slate-800 shadow-inner group overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative w-20 h-20 mx-auto mb-4 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center shadow-inner group overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               {/* Logo from public/logo.png */}
               <Image 
                 src="/logo.png" 
@@ -65,21 +65,21 @@ const AuthForm = ({ onAuthSuccess }) => {
               />
             </div>
             
-            <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-200 via-slate-100 to-blue-200 bg-clip-text text-transparent">
+            <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-700 via-indigo-900 to-blue-750 bg-clip-text text-transparent">
               BiD LoanManager
             </h1>
-            <p className="text-slate-400 text-sm mt-2 font-medium">
+            <p className="text-slate-500 text-sm mt-2 font-medium">
               Enterprise debt tracking and asset analytics
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
                 Email Address
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                   <FaEnvelope className="text-sm" />
                 </div>
                 <input
@@ -87,18 +87,18 @@ const AuthForm = ({ onAuthSuccess }) => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-slate-900/50 border border-slate-800/80 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all font-medium text-sm"
+                  className="w-full pl-10 pr-4 py-3 bg-white border border-slate-250 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all font-medium text-sm"
                   placeholder="name@company.com"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
                 Password
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                   <FaLock className="text-sm" />
                 </div>
                 <input
@@ -107,13 +107,13 @@ const AuthForm = ({ onAuthSuccess }) => {
                   minLength={6}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-10 py-3 bg-slate-900/50 border border-slate-800/80 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all font-medium text-sm"
+                  className="w-full pl-10 pr-10 py-3 bg-white border border-slate-250 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all font-medium text-sm"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-450 hover:text-indigo-400 transition-colors cursor-pointer"
+                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-indigo-600 transition-colors cursor-pointer"
                 >
                   {showPassword ? <FaEyeSlash className="text-sm" /> : <FaEye className="text-sm" />}
                 </button>
@@ -121,7 +121,7 @@ const AuthForm = ({ onAuthSuccess }) => {
             </div>
 
             {error && (
-              <div className="bg-rose-500/10 border border-rose-500/20 text-rose-300 px-4 py-3 rounded-xl text-xs font-medium leading-relaxed">
+              <div className="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl text-xs font-medium leading-relaxed">
                 {error}
               </div>
             )}
@@ -129,7 +129,7 @@ const AuthForm = ({ onAuthSuccess }) => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 text-white rounded-xl font-semibold shadow-lg shadow-indigo-950/50 hover:shadow-indigo-900/50 transform hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-55 disabled:cursor-not-allowed text-sm"
+              className="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white rounded-xl font-semibold shadow-md shadow-indigo-900/10 hover:shadow-indigo-900/20 transform hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-55 disabled:cursor-not-allowed text-sm"
             >
               {loading ? (
                 <div className="flex items-center justify-center gap-2">
@@ -142,13 +142,13 @@ const AuthForm = ({ onAuthSuccess }) => {
             </button>
           </form>
 
-          <div className="mt-6 text-center border-t border-slate-800/60 pt-5">
+          <div className="mt-6 text-center border-t border-slate-100 pt-5">
             <button
               onClick={() => {
                 setIsLogin(!isLogin);
                 setError('');
               }}
-              className="text-indigo-400 hover:text-indigo-300 text-xs font-semibold tracking-wide transition-colors"
+              className="text-indigo-600 hover:text-indigo-800 text-xs font-semibold tracking-wide transition-colors"
             >
               {isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Sign In'}
             </button>

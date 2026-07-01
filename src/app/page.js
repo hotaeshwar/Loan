@@ -45,46 +45,46 @@ import { LoanFormModal, PaymentFormModal } from '../components/Modals';
 // Custom dialog for upcoming payments popup
 const ReminderPopup = ({ reminders, onClose, onPayLoan }) => {
   return (
-    <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-fadeIn">
+    <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-fadeIn">
       {/* Container with gold gradient glow */}
       <div className="relative w-full max-w-lg">
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur opacity-30"></div>
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur opacity-15"></div>
         
-        <div className="relative bg-[#0d1322] border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
+        <div className="relative bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-2xl">
           {/* Header */}
-          <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-b border-amber-500/30 p-6 flex justify-between items-center">
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-100 p-6 flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <div className="bg-amber-500/10 p-3 border border-amber-500/30 rounded-xl text-amber-400 text-xl animate-pulse">
+              <div className="bg-amber-100 p-3 border border-amber-200 rounded-xl text-amber-600 text-xl">
                 <FaBell />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-slate-100">Dues Outstanding</h2>
-                <p className="text-amber-400/80 text-xs font-semibold mt-0.5">
+                <h2 className="text-xl font-bold text-slate-800">Dues Outstanding</h2>
+                <p className="text-amber-700 text-xs font-semibold mt-0.5">
                   You have {reminders.length} schedule{reminders.length !== 1 ? 's' : ''} due within 7 days
                 </p>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-slate-200 p-1.5 hover:bg-slate-900 rounded-lg transition-colors cursor-pointer"
+              className="text-slate-400 hover:text-slate-650 p-1.5 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer"
             >
               <FaTimes />
             </button>
           </div>
 
           {/* Dues list scrollable */}
-          <div className="p-6 max-h-[320px] overflow-y-auto space-y-4">
+          <div className="p-6 max-h-[320px] overflow-y-auto space-y-4 bg-white">
             {reminders.map((reminder) => (
               <div
                 key={reminder.loan_id}
                 className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-all ${
                   reminder.days_until_payment <= 3
-                    ? 'bg-rose-500/[0.02] border-rose-500/20'
-                    : 'bg-amber-500/[0.02] border-amber-500/20'
+                    ? 'bg-rose-50/30 border-rose-200'
+                    : 'bg-amber-50/30 border-amber-200'
                 }`}
               >
                 <div>
-                  <h3 className="font-bold text-slate-200 text-sm">{reminder.source}</h3>
+                  <h3 className="font-bold text-slate-800 text-sm">{reminder.source}</h3>
                   <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mt-0.5">{reminder.loan_type}</p>
                   
                   <span className="text-[10px] text-slate-400 block mt-2 font-mono">
@@ -98,11 +98,11 @@ const ReminderPopup = ({ reminders, onClose, onPayLoan }) => {
 
                 <div className="flex sm:flex-col items-end justify-between sm:justify-start gap-2">
                   <div className="text-right">
-                    <p className="text-lg font-extrabold text-slate-100 font-mono">
+                    <p className="text-lg font-extrabold text-slate-800 font-mono">
                       ₹{reminder.monthly_payment.toLocaleString('en-IN')}
                     </p>
                     <span className={`text-[10px] font-bold block mt-0.5 ${
-                      reminder.days_until_payment <= 3 ? 'text-rose-400' : 'text-amber-400'
+                      reminder.days_until_payment <= 3 ? 'text-rose-600' : 'text-amber-600'
                     }`}>
                       {reminder.days_until_payment <= 0 
                         ? 'OVERDUE!' 
@@ -128,13 +128,13 @@ const ReminderPopup = ({ reminders, onClose, onPayLoan }) => {
           </div>
 
           {/* Footer */}
-          <div className="bg-slate-950/40 px-6 py-4 flex flex-col sm:flex-row gap-3 justify-between items-center border-t border-slate-800/80">
+          <div className="bg-slate-50 px-6 py-4 flex flex-col sm:flex-row gap-3 justify-between items-center border-t border-slate-150">
             <p className="text-slate-500 text-[10px] font-medium leading-normal text-center sm:text-left">
               💡 Setup reminders to track cashflow effectively.
             </p>
             <button
               onClick={onClose}
-              className="px-4 py-2 bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-slate-100 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+              className="px-4 py-2 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-350 text-slate-700 rounded-xl text-xs font-bold transition-colors cursor-pointer"
             >
               Acknowledge
             </button>
@@ -395,13 +395,13 @@ const MainDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#070a13] flex items-center justify-center">
+      <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="relative w-12 h-12 mx-auto">
-            <div className="absolute inset-0 border-4 border-indigo-500/20 rounded-full"></div>
-            <div className="absolute inset-0 border-4 border-t-indigo-500 rounded-full animate-spin"></div>
+            <div className="absolute inset-0 border-4 border-indigo-200 rounded-full"></div>
+            <div className="absolute inset-0 border-4 border-t-indigo-650 rounded-full animate-spin"></div>
           </div>
-          <p className="text-slate-400 text-sm font-semibold tracking-wide">Syncing workspace...</p>
+          <p className="text-slate-600 text-sm font-semibold tracking-wide">Syncing workspace...</p>
         </div>
       </div>
     );
@@ -414,42 +414,42 @@ const MainDashboard = () => {
   const reminders = calculateReminders();
 
   return (
-    <div className="min-h-screen bg-[#070a13] flex text-slate-100">
+    <div className="min-h-screen bg-[#f8fafc] flex text-slate-800">
       {/* Sidebar Panel */}
       <div 
         className={`${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0 fixed lg:relative inset-y-0 left-0 z-50 w-72 bg-[#090e1a]/95 border-r border-slate-800/80 transition-transform duration-300 ease-in-out flex flex-col justify-between`}
+        } lg:translate-x-0 fixed lg:relative inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-200/80 transition-transform duration-300 ease-in-out flex flex-col justify-between`}
       >
         <div className="flex-1 py-6">
           {/* Brand Logo Header */}
-          <div className="flex items-center justify-between px-6 pb-6 border-b border-slate-800/60">
+          <div className="flex items-center justify-between px-6 pb-6 border-b border-slate-100">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 shadow-inner flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 shadow-inner flex items-center justify-center overflow-hidden">
                 <Image src="/logo.png" alt="BiD Logo" width={32} height={32} className="object-contain" />
               </div>
               <div>
-                <h1 className="text-lg font-bold text-slate-100 tracking-tight">BiD LoanManager</h1>
-                <p className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase">Portal</p>
+                <h1 className="text-lg font-bold text-slate-800 tracking-tight">BiD LoanManager</h1>
+                <p className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase">Portal</p>
               </div>
             </div>
             
             <button
               onClick={() => setSidebarOpen(false)}
-              className="lg:hidden text-slate-400 hover:text-slate-200 p-1 rounded-lg hover:bg-slate-950 border border-slate-900"
+              className="lg:hidden text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-50 border border-slate-200"
             >
               <FaTimes />
             </button>
           </div>
 
           {/* User Details Banner */}
-          <div className="m-4 p-4 rounded-2xl bg-slate-950/60 border border-slate-900/80 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center flex-shrink-0 text-sm">
+          <div className="m-4 p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center flex-shrink-0 text-sm">
               <FaUser />
             </div>
             <div className="min-w-0">
-              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-500">Active User</p>
-              <p className="text-xs font-semibold text-slate-300 truncate mt-0.5">{user.email}</p>
+              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Active User</p>
+              <p className="text-xs font-semibold text-slate-700 truncate mt-0.5">{user.email}</p>
             </div>
           </div>
 
@@ -467,14 +467,14 @@ const MainDashboard = () => {
                   }}
                   className={`w-full flex items-center gap-3.5 px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm cursor-pointer ${
                     isActive 
-                      ? 'bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-bold shadow-md shadow-indigo-950/20' 
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 border border-transparent'
+                      ? 'bg-indigo-50 text-indigo-700 border border-indigo-100/60 font-bold shadow-sm' 
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-transparent'
                   }`}
                 >
                   <span className="text-base">{item.icon}</span>
                   <span className="flex-1">{item.label}</span>
                   {item.id === 'reminders' && reminders.length > 0 && (
-                    <span className="bg-rose-500 text-white text-[10px] font-bold rounded-full px-2 py-0.5 border border-rose-600 animate-pulse">
+                    <span className="bg-rose-500 text-white text-[10px] font-bold rounded-full px-2 py-0.5 border border-rose-600">
                       {reminders.length}
                     </span>
                   )}
@@ -485,10 +485,10 @@ const MainDashboard = () => {
         </div>
 
         {/* Sidebar Footer */}
-        <div className="p-4 border-t border-slate-800/60">
+        <div className="p-4 border-t border-slate-100">
           <button
             onClick={handleSignOut}
-            className="w-full flex items-center justify-center gap-2 py-3 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 hover:border-rose-500/30 text-rose-400 rounded-xl text-xs font-bold transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 py-3 bg-rose-50 hover:bg-rose-100/60 border border-rose-200 text-rose-600 rounded-xl text-xs font-bold transition-all cursor-pointer"
           >
             <FaSignOutAlt className="text-sm" />
             <span>Sign Out Workspace</span>
@@ -497,12 +497,12 @@ const MainDashboard = () => {
       </div>
 
       {/* Main Workspace Body */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 bg-[#f8fafc]">
         {/* Top Navbar */}
-        <div className="bg-[#090e1a]/80 backdrop-blur-md border-b border-slate-800/60 px-6 py-4 flex items-center justify-between lg:justify-end gap-4">
+        <div className="bg-white/80 backdrop-blur-md border-b border-slate-200/80 px-6 py-4 flex items-center justify-between lg:justify-end gap-4">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="lg:hidden text-slate-400 hover:text-slate-200 p-2 hover:bg-slate-900 rounded-xl border border-slate-900 flex-shrink-0 cursor-pointer"
+            className="lg:hidden text-slate-500 hover:text-slate-700 p-2 hover:bg-slate-50 rounded-xl border border-slate-200 flex-shrink-0 cursor-pointer"
           >
             <FaBars className="text-lg" />
           </button>
@@ -517,9 +517,9 @@ const MainDashboard = () => {
                   showNotification('All payments caught up!');
                 }
               }}
-              className="relative w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 flex items-center justify-center text-slate-400 hover:text-slate-200 shadow-md cursor-pointer transition-all"
+              className="relative w-10 h-10 rounded-xl bg-white border border-slate-200 hover:border-slate-350 flex items-center justify-center text-slate-500 hover:text-slate-800 shadow-sm cursor-pointer transition-all"
             >
-              <FaBell className={reminders.length > 0 ? 'text-amber-400 animate-pulse' : ''} />
+              <FaBell className={reminders.length > 0 ? 'text-amber-500 animate-pulse' : ''} />
               {reminders.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-rose-500 border border-rose-600 text-white text-[9px] font-bold rounded-full w-4.5 h-4.5 flex items-center justify-center">
                   {reminders.length}
@@ -530,7 +530,7 @@ const MainDashboard = () => {
             {/* Quick Action Add Loan */}
             <button
               onClick={() => setShowLoanForm(true)}
-              className="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 text-white px-4 py-2.5 rounded-xl font-bold shadow-lg shadow-indigo-950/40 text-xs flex items-center gap-1.5 transform hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+              className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-4 py-2.5 rounded-xl font-bold shadow-md text-xs flex items-center gap-1.5 transform hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
             >
               <FaPlus className="text-[10px]" />
               <span>Add Loan</span>
@@ -621,15 +621,15 @@ const MainDashboard = () => {
           <div className="relative">
             <div className={`absolute -inset-0.5 ${
               notification.type === 'success' ? 'bg-emerald-500' : 'bg-rose-500'
-            } rounded-xl blur opacity-30`}></div>
+            } rounded-xl blur opacity-15`}></div>
             
-            <div className="relative bg-[#0d1322] border border-slate-800 px-5 py-3.5 rounded-xl shadow-xl flex items-center gap-3">
+            <div className="relative bg-white border border-slate-200 px-5 py-3.5 rounded-xl shadow-lg flex items-center gap-3">
               {notification.type === 'success' ? (
-                <FaCheckCircle className="text-emerald-400 text-base" />
+                <FaCheckCircle className="text-emerald-600 text-base" />
               ) : (
-                <FaExclamationTriangle className="text-rose-400 text-base" />
+                <FaExclamationTriangle className="text-rose-600 text-base" />
               )}
-              <span className="text-slate-200 text-xs font-semibold tracking-wide">
+              <span className="text-slate-800 text-xs font-semibold tracking-wide">
                 {notification.message}
               </span>
             </div>
@@ -640,7 +640,7 @@ const MainDashboard = () => {
       {/* Sidebar mobile overlay backdrops */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs lg:hidden z-40 animate-fadeIn"
+          className="fixed inset-0 bg-slate-900/30 backdrop-blur-xs lg:hidden z-40 animate-fadeIn"
           onClick={() => setSidebarOpen(false)}
         ></div>
       )}
