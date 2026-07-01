@@ -145,6 +145,66 @@ const ReminderPopup = ({ reminders, onClose, onPayLoan }) => {
   );
 };
 
+const playAlertTone = (type = 'success') => {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+    
+    if (type === 'success') {
+      // Rising double chime
+      const osc1 = ctx.createOscillator();
+      const gain1 = ctx.createGain();
+      osc1.frequency.value = 600;
+      gain1.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain1.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.2);
+      osc1.connect(gain1);
+      gain1.connect(ctx.destination);
+      osc1.start();
+      osc1.stop(ctx.currentTime + 0.2);
+      
+      setTimeout(() => {
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.frequency.value = 800;
+        gain2.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain2.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.3);
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.start();
+        osc2.stop(ctx.currentTime + 0.3);
+      }, 80);
+    } else if (type === 'error') {
+      // Low buzz warn beep
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.value = 160;
+      gain.gain.setValueAtTime(0.05, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 0.15);
+      gain.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.25);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.25);
+    } else if (type === 'reminder') {
+      // Ambient notification bell
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = 523.25; // C5
+      gain.gain.setValueAtTime(0.05, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.6);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.6);
+    }
+  } catch (error) {
+    console.error('AudioContext chime failed:', error);
+  }
+};
+
 const MainDashboard = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -160,6 +220,7 @@ const MainDashboard = () => {
 
   const showNotification = (message, type = 'success') => {
     setNotification({ message, type });
+    playAlertTone(type);
     setTimeout(() => setNotification(null), 3500);
   };
 
@@ -199,6 +260,7 @@ const MainDashboard = () => {
         const timer = setTimeout(() => {
           setShowReminderPopup(true);
           setHasShownReminder(true);
+          playAlertTone('reminder');
         }, 1500);
         return () => clearTimeout(timer);
       }

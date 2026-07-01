@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   FaBell, 
   FaCreditCard, 
@@ -13,6 +13,21 @@ import {
 } from 'react-icons/fa';
 
 const DashboardView = ({ loans, reminders, onPayLoan, onViewTab }) => {
+  const [timeString, setTimeString] = useState('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const datePart = now.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+      const timePart = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+      setTimeString(`${datePart} • ${timePart}`);
+    };
+    
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   // Compute dashboard metrics from active loans state
   const total_borrowed = loans.reduce((sum, l) => sum + l.total_amount, 0);
   const total_paid = loans.reduce((sum, l) => sum + l.paid_amount, 0);
@@ -95,9 +110,15 @@ const DashboardView = ({ loans, reminders, onPayLoan, onViewTab }) => {
           <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-slate-100 via-indigo-100 to-slate-200 bg-clip-text text-transparent">
             Workspace Overview
           </h1>
-          <p className="text-slate-400 text-sm mt-1 font-medium">
-            Real-time analytics and tracking summary
-          </p>
+          <div className="flex flex-wrap items-center gap-2 text-slate-400 text-sm mt-1 font-medium">
+            <span>Real-time analytics and tracking summary</span>
+            <span className="hidden sm:inline text-slate-700">•</span>
+            {timeString && (
+              <span className="text-indigo-400 font-bold bg-indigo-500/5 px-2.5 py-0.5 rounded-lg border border-indigo-500/10 font-mono tracking-wide shadow-sm text-xs animate-fadeIn">
+                {timeString}
+              </span>
+            )}
+          </div>
         </div>
         
         <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
