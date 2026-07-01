@@ -528,13 +528,15 @@ const MainDashboard = () => {
             </button>
 
             {/* Quick Action Add Loan */}
-            <button
-              onClick={() => setShowLoanForm(true)}
-              className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-4 py-2.5 rounded-xl font-bold shadow-md text-xs flex items-center gap-1.5 transform hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
-            >
-              <FaPlus className="text-[10px]" />
-              <span>Add Loan</span>
-            </button>
+            {currentView === 'dashboard' && (
+              <button
+                onClick={() => setShowLoanForm(true)}
+                className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-4 py-2.5 rounded-xl font-bold shadow-md text-xs flex items-center gap-1.5 transform hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+              >
+                <FaPlus className="text-[10px]" />
+                <span>Add Loan</span>
+              </button>
+            )}
           </div>
         </div>
 
